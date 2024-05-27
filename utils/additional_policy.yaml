@@ -1,0 +1,31 @@
+Parameters:
+  App:
+    Type: String
+    Description: Your application's name.
+  Env:
+    Type: String
+    Description: The environment name for the service.
+  Name:
+    Type: String
+    Description: The name of the service.
+
+Resources:
+  AccessAdditionalResourcesPolicy:
+    Type: AWS::IAM::ManagedPolicy
+    Properties:
+      PolicyDocument:
+        Version: 2012-10-17
+        Statement:
+        - Sid: BedrockAossS3All
+          Effect: Allow
+          Action:
+            - bedrock:*
+            - aoss:*
+            - s3:*
+          Resource: "*"
+
+Outputs:
+  AccessAdditionalResourcesPolicyArn:
+    Description: "The ARN of the ManagedPolicy to attatch to the task role."
+    Value: !Ref AccessAdditionalResourcesPolicy
+  
